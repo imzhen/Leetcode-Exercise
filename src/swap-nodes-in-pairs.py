@@ -8,19 +8,19 @@
 # Total Submissions: 405301
 # Testcase Example:  '[]'
 #
-# 
+#
 # Given a linked list, swap every two adjacent nodes and return its head.
-# 
-# 
-# 
+#
+#
+#
 # For example,
 # Given 1->2->3->4, you should return the list as 2->1->4->3.
-# 
-# 
-# 
+#
+#
+#
 # Your algorithm should use only constant space. You may not modify the values
 # in the list, only nodes itself can be changed.
-# 
+#
 #
 # Definition for singly-linked list.
 # class ListNode(object):
@@ -28,9 +28,30 @@
 #         self.val = x
 #         self.next = None
 
+
 class Solution(object):
+
     def swapPairs(self, head):
         """
         :type head: ListNode
         :rtype: ListNode
         """
+        start = ListNode(0)
+        if not head:
+            return head
+        start.next = head
+        curr = start
+        back = head
+        front = head.next
+        while front:
+            curr_next = front.next
+            curr.next = front
+            front.next = back
+            back.next = curr_next
+            if curr_next:
+                curr = back
+                back = curr_next
+                front = curr_next.next
+            else:
+                break
+        return start.next
